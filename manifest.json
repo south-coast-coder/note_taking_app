@@ -1,0 +1,27 @@
+{
+  "name": "Fresh Chrome Extension",
+  "description": "Proof of Concept Notes App[Manifest V3].",
+  "version": "0.0.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup":"index.html"
+    
+  },
+ 
+ 
+  "web_accessible_resources": [
+    {
+      "resources": [ "plus-sign-icon.png" ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+ "content_scripts": [
+    { "matches":[
+       "<all_urls>"],
+    "js":["content.js"]
+}
+],
+ "background":
+ {"service_worker":"background.js"
+}
+}
