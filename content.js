@@ -133,6 +133,17 @@ window.onload=function(){
         collection[i].style.width="1.5vw"
         collection[i].style.marginLeft=".9vw"
         collection[i].style.marginTop="2.4vw"
+         collection[i].addEventListener('click', function(){
+           alert(this)
+           alert(this.previousSibling)
+           alert(this.closest('div'))
+           this.closest('div').previousElementSibling.remove()
+           this.closest('div').remove()
+           this.remove()
+          
+
+
+        })
     }
      
         
