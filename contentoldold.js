@@ -16,14 +16,14 @@ window.onload=function(){
         mouse_in=false
     }
     var styles={
-        height:"30vw",
-        width:"30vw",
+        height:"25vw",
+        width:"25vw",
         background:'white',
         position:'fixed',
         top:"0",
         right:"0",
-        zIndex:"100000000000000",
-        borderRadius:"20%"
+        zIndex:"10000",
+        borderRadius:"30%"
         
     };
      function activateField(id){
@@ -40,28 +40,18 @@ window.onload=function(){
 
     Object.assign(div.style, styles);
     div.innerHTML=`
-        <div id="1" style="display:flex;width:100%;flex-wrap:wrap;flex-direction:row;padding-top:10%;" >
-        <div style="flex-direction:row; width:40%;height:85%;"
-        <div class="input_div" style="display:flex;width:80%;flex-wrap:wrap;flex-direction:column">
-        
-        <input type="text" style="height:2px;background:none;color:black;border-top:none;border-left:none;border-right:none;border-bottom:none;text-align:center; width:9vw;margin-left:2vw;height:2vw;padding-bottom:0;border:0px;">
+        <div id="1" style="display:flex;width:100%;height:85%;flex-wrap:wrap;flex-direction:row;padding-top:10%;" >
+
+        <div class="input_div" style="display:flex;width:50%;height:85%;flex-wrap:wrap;flex-direction:column">
+        <input type="text" style="height:2px;background:none;color:black;border-bottom:solid black .1vw;border-top:none;border-left:none;border-right:none; position:relative;top:-2.7vw;left:-9vw;max-width:6vw;outline:none;height:2vw;">
         <input type="text"  id="sparkyoo1" class="hoohoo draggable" onclick="activateField("sparkyoo1")"><br><br>
+         
+        <input type="text" style="height:2px;background:none;color:black;border-bottom:solid green 4px;border-top:none;border-left:none;border-right:none;">
+        <input type="text"  id="sparkyoo2" class= "hoohoo draggable" onclick="activateField("sparkyoo2")" ><br><br>
         </div>
-        <div style="width:10%;">
-      
-        <img class="minus">
-
-      
-        </div>
-
-       
-       
-        </div>
-        
         <div id="2" style="width:100%;height:15%; text-align:centre; padding-bottom:10%">
         <span id="plusplus" style="padding-left:5vw"> <img  id ="plusplusimg" onclick="newItem" style="margin-bottom:2vw"> <br><br> </span>
         </div>
-
 
 
     `
@@ -71,7 +61,7 @@ window.onload=function(){
     document.body.appendChild(div); 
    
    
-    
+
     function newItem(){
         
         nums=[]
@@ -85,56 +75,31 @@ window.onload=function(){
         var last_num=Math.max(...nums)
         
         next_num=(last_num+1).toString()
-        entryID="sparkyoo"+next_num
-        input_fields.push(entryID)
-
-        newHtml=`<div style="display:flex;flex-direction:row; width:100%;height:85%;">
-        <div class="input_div" style="display:flex;width:80%;flex-wrap:wrap;flex-direction:column">
+        var entry=document.createElement("input"); 
+        entry.type="text"
+        entry.id="sparkyoo"+next_num
+        input_fields.push(entry.id)
         
-        <input type="text" style="height:2px;background:none;color:black;border-top:none;border-left:none;border-right:none;border-bottom:none;text-align:center; width:9vw;margin-left:2vw;height:2vw;padding-bottom:0;border:0px;">
-        <input type="text"  id="${entryID}" class="hoohoo draggable" onclick="activateField("${entryID}")"><br><br>
-        </div>
-        <div style="width:10%;">
-      
-        <img class="minus">
-
-      
-        </div>
-        </div>
-        </div>
-        </div>
-`
+        entry.class="hoohoo draggable"
+        entry.onclick=`activateField(${entry.id})`
+        entry.style.marginLeft="2vw"
+        entry.style.width="9vw"
+        entry.style.height="2vw"
         
-        const newDiv = document.createElement("span");
-        newDiv.innerHTML=newHtml
         var div=document.getElementById("1")
-        div.append(newDiv)
+        div.appendChild(entry)
         var br = document.createElement("br");
-        var entry=document.getElementById(entryID)
-        entry.addEventListener('click',function()
+        
+         entry.addEventListener('click',function()
         {alert("clicked")
          this_num=entry.id.at(-1)
          use_input=this_num
          alert("use input="+use_input)
          
 
-    }) 
-         let elements=document.querySelectorAll('.hoohoo')
-    for (const element of elements){
-        element.style.marginLeft="2vw"
-        element.style.width="9vw"
-        element.style.height="2vw"
-        element.flexBasis="2"
-    }
-    const collection = document.getElementsByClassName("minus");
-    for (let i = 0; i < collection.length; i++) {
-      collection[i].src=chrome.runtime.getURL("collapse.png");
-        collection[i].style.height="1.5vw"
-        collection[i].style.width="1.5vw"
-        collection[i].style.marginLeft=".9vw"
-        collection[i].style.marginTop="2.4vw"
-    }
-     
+    })
+        
+        
         
     }
     document.getElementById("plusplus").addEventListener ("click", newItem)
@@ -143,29 +108,6 @@ window.onload=function(){
     plus.style.height="2.5vw"
     plus.style.width="2.5vw"
     plus.style.marginLeft="5.5vw"
-    const collection = document.getElementsByClassName("minus");
-    for (let i = 0; i < collection.length; i++) {
-      collection[i].src=chrome.runtime.getURL("collapse.png");
-        collection[i].style.height="1.5vw"
-        collection[i].style.width="1.5vw"
-        collection[i].style.marginLeft=".5vw"
-        collection[i].style.marginTop="2.4vw"
-        collection[i].addEventListener('click', function(){
-           alert(this)
-           alert(this.previousSibling)
-           alert(this.closest('div'))
-           this.closest('div').previousElementSibling.remove()
-           this.closest('div').remove()
-           this.remove()
-          
-
-
-        })
-    }
-
-
-   
-   
     
     
 
@@ -191,15 +133,20 @@ window.onload=function(){
         element.flexBasis="2"
     }
     var sparky1 =document.getElementById("sparkyoo1")
-   
-    
+    var sparky2=document.getElementById("sparkyoo2")
+    var sparky3=document.getElementById("sparkyoo3")
     sparky1.addEventListener('click',function()
         {console.log("clicked")
          use_input=1
          console.log("use input="+use_input)
 
     })
-   
+    sparky2.addEventListener('click',function()
+        {console.log("clicked")
+         use_input=2
+         console.log("use input="+use_input)
+
+    })
    
    
     window.addEventListener("click",function(event){
@@ -320,7 +267,6 @@ var container = document.getElementById('sparkywoo')
 
 
 ,1000);}
-
 
 
 
