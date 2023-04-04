@@ -3,8 +3,8 @@ window.onload=function(){
     input2,
     use_input,
     mouse_in=false,
-    existsSchema=false, //Use this to check whether have set a schema or not - if not just load one input box see code below (line)
-    input_fields=[],
+    existsSchema=false,
+    input_fields=["sparkyoo1","sparkyoo2","sparkyoo3"],
     dragId=false,
     odd_even="even"
     var div=document.createElement("div"); 
@@ -17,8 +17,8 @@ window.onload=function(){
         mouse_in=false
     }
     var styles={
-        height:"50vw",  //was 30 for both
-        width:"50vw",
+        height:"30vw",
+        width:"30vw",
         background:'white',
         position:'fixed',
         top:"0",
@@ -41,13 +41,27 @@ window.onload=function(){
 
     Object.assign(div.style, styles);
     div.innerHTML=`
-        <div id="1" style="display:flex;width:100%;flex-wrap:wrap;flex-direction:row;padding-top:10%;height:80%;align-content:flex-start;" >
-        </div>
-        <div id="2" style="width:100%;height:10%; text-align:centre; padding-bottom:10%;">
+        <div id="1" style="display:flex;width:100%;flex-wrap:wrap;flex-direction:row;padding-top:10%;" >
+        <div style="flex-direction:row; width:40%;height:85%;"
+        <div class="input_div" style="display:flex;width:80%;flex-wrap:wrap;flex-direction:column">
         
-        <span id="plusplus" style="padding-left:6vw; "> <img  id ="plusplusimg" onclick="newItem" style="margin-bottom:2vw;margin-left:35%;"> <br><br> </span>
+        <input type="text" style="height:2px;background:none;color:black;border-top:none;border-left:none;border-right:none;border-bottom:none;text-align:center; width:9vw;margin-left:2vw;height:2vw;padding-bottom:0;border:0px;">
+        <input type="text"  id="sparkyoo1" class="hoohoo draggable" onclick="activateField("sparkyoo1")"><br><br>
+        </div>
+        <div style="width:10%;">
+      
+        <img class="minus">
+
+      
+        </div>
+
+       
+       
         </div>
         
+        <div id="2" style="width:100%;height:15%; text-align:centre; padding-bottom:10%">
+        <span id="plusplus" style="padding-left:5vw"> <img  id ="plusplusimg" onclick="newItem" style="margin-bottom:2vw"> <br><br> </span>
+        </div>
 
 
 
@@ -60,9 +74,6 @@ window.onload=function(){
    
     
     function newItem(){
-       for (var item in input_fields){
-        alert(input_fields[item])
-       }
         
         nums=[]
         for(var i in input_fields){
@@ -81,7 +92,7 @@ window.onload=function(){
         newHtml=`<div style="display:flex;flex-direction:row; width:100%;height:85%;">
         <div class="input_div" style="display:flex;width:80%;flex-wrap:wrap;flex-direction:column">
         
-        <input type="text" style="height:2px;background:none;color:black;border-top:none;border-left:none;border-right:none;border-bottom:none;text-align:center; width:9vw;margin-left:2vw;height:25%;padding-bottom:0;border:0px;font-size:90%;">
+        <input type="text" style="height:2px;background:none;color:black;border-top:none;border-left:none;border-right:none;border-bottom:none;text-align:center; width:9vw;margin-left:2vw;height:2vw;padding-bottom:0;border:0px;">
         <input type="text"  id="${entryID}" class="hoohoo draggable" onclick="activateField("${entryID}")"><br><br>
         </div>
         <div style="width:10%;">
@@ -92,7 +103,7 @@ window.onload=function(){
         </div>
         </div>
         </div>
-       
+        </div>
 `
         
         const newDiv = document.createElement("span");
@@ -143,7 +154,7 @@ window.onload=function(){
     plus.src = chrome.runtime.getURL("plus-sign-icon.png");
     plus.style.height="2.5vw"
     plus.style.width="2.5vw"
-    plus.style.marginLeft="35%"
+    plus.style.marginLeft="5.5vw"
     const collection = document.getElementsByClassName("minus");
     for (let i = 0; i < collection.length; i++) {
       collection[i].src=chrome.runtime.getURL("collapse.png");
@@ -189,58 +200,9 @@ window.onload=function(){
         element.style.marginLeft="2vw"
         element.style.width="9vw"
         element.style.height="2vw"
-        element.flexBasis="3"
+        element.flexBasis="2"
     }
-    if (existsSchema==false){
-    alert("not exits")
-    var divNew=document.createElement('span')
-   
-
-    var divHtml=`<div style="display:flex;flex-direction:row; width:100%;height:85%;">
-        <div class="input_div" style="display:flex;width:80%;flex-wrap:wrap;flex-direction:column">
-        
-        <input type="text" style="height:2px;background:none;color:black;border-top:none;border-left:none;border-right:none;border-bottom:none;text-align:center; width:9vw;margin-left:2vw;height:25%;padding-bottom:0;border:0px;font-size:90%">
-        <input type="text"  id="sparkyoo1" class="hoohoo draggable" onclick="activateField("sparkyoo1")"><br><br>
-        </div>
-        <div style="width:10%;">
-      
-        <img class="minus">
-
-      
-        </div>
-        </div>
-        </div>
-        </div>
-`
-    divNew.innerHTML=divHtml
-
-    var div2=document.getElementById("1")
-    div2.append(divNew)
-    var collection1=document.getElementsByClassName('minus')
-    collection1[0].src=chrome.runtime.getURL("collapse.png");
-        collection1[0].style.height="1.5vw"
-        collection1[0].style.width="1.5vw"
-        collection1[0].style.marginLeft=".9vw"
-        collection1[0].style.marginTop="2.4vw"
-         collection1[0].addEventListener('click', function(){
-           alert(this)
-           alert(this.previousSibling)
-           alert(this.closest('div'))
-           this.closest('div').previousElementSibling.remove()
-           this.closest('div').remove()
-           this.remove()
-          
-
-
-        })
-
-    input_fields.push("sparkyoo1")
-
     var sparky1 =document.getElementById("sparkyoo1")
-    sparky1.style.marginLeft="2vw"
-    sparky1.style.width="9vw"
-    sparky1.style.height="2vw"
-    sparky1.flexBasis="2"
    
     
     sparky1.addEventListener('click',function()
@@ -249,8 +211,7 @@ window.onload=function(){
          console.log("use input="+use_input)
 
     })
-   existsSchema=true
-   }
+   
    
    
     window.addEventListener("click",function(event){
