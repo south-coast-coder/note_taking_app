@@ -4,6 +4,7 @@ window.onload=function(){
     use_input,
     mouse_in=false,
     existsSchema=false, //Use this to check whether have set a schema or not - if not just load one input box see code below (line)
+    schema=["sparkywoo1","sparkywoo2","boo"]
     input_fields=[],
     dragId=false,
     odd_even="even"
@@ -47,6 +48,7 @@ window.onload=function(){
         
         <span id="plusplus" style="padding-left:6vw; "> <img  id ="plusplusimg" onclick="newItem" style="margin-bottom:2vw;margin-left:35%;"> <br><br> </span>
         </div>
+        <div id='plus2'>afafkaf</div>. 
         
 
 
@@ -138,6 +140,32 @@ window.onload=function(){
      
         
     }
+    function newSchema(){ //setup new schema at beggining of script need to get a message seeing if this exists or not - if exists use to prepopulate fields
+       alert(schema)
+        window.URL = window.webkitURL || window.URL;
+    let csvContent = "data:text/csv;charset=utf-8," 
+    +schema.join(",")
+    //+ schema.map(e => e.join(",")).join("\n");
+    alert(csvContent)
+   var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "my_data.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click();
+    // delete a;// we don't need this anymore
+       chrome.runtime.sendMessage({type:"schema",schema: schema}, function(response) {
+          console.log(response);
+    
+   
+
+});
+
+    }
+    var add = document.getElementById("plus2")
+    add.addEventListener('click',newSchema)
+
     document.getElementById("plusplus").addEventListener ("click", newItem)
     let plus = document.getElementById("plusplusimg");
     plus.src = chrome.runtime.getURL("plus-sign-icon.png");
